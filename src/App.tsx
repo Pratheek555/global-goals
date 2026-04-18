@@ -341,7 +341,7 @@ function App() {
               <span className="hero-whisper hero-whisper--right">Live</span>
             </div>
             <p className="hero-body">
-              A 24-hour build sprint at SRM-AP University, Amaravati, bringing teams together
+              A 12-hour build sprint at SRM-AP University, Amaravati, bringing teams together
               to prototype bold solutions aligned with the Sustainable Development Goals.
             </p>
             <div className="hero-actions">
