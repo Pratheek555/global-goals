@@ -1,7 +1,6 @@
 import { useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import heroImage from './assets/hero.png'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -58,25 +57,18 @@ const prizeSpotlight = {
 
 const previousHackathonPhotos = [
   {
-    src: heroImage,
-    alt: 'Participants working together during a previous hackathon build sprint.',
-    title: 'Midnight build sprint',
-    summary: 'Teams moved from ideation to working demos in the shared build bay.',
-    position: 'center 34%',
+    src: '/carousel/_MG_1937.jpg',
+    alt: 'Participants and organizers gathered during a previous hackathon session.',
+    title: 'Hackathon floor energy',
+    summary: 'A live look at the atmosphere, turnout, and momentum from the previous edition.',
+    position: 'center center',
   },
   {
-    src: heroImage,
-    alt: 'Mentors reviewing a team project during a previous hackathon feedback round.',
-    title: 'Mentor checkpoints',
-    summary: 'Live feedback loops helped teams tighten their problem framing and delivery.',
-    position: 'center 52%',
-  },
-  {
-    src: heroImage,
-    alt: 'Students presenting final hackathon projects to judges and peers.',
-    title: 'Final pitch room',
-    summary: 'The last round focused on clarity, urgency, and prototype proof under pressure.',
-    position: 'center 68%',
+    src: '/carousel/_MG_1966.jpg',
+    alt: 'Participants during a previous hackathon captured in the event venue.',
+    title: 'Previous event highlights',
+    summary: 'Scenes from the earlier hackathon showcasing participation, teamwork, and event scale.',
+    position: 'center center',
   },
 ]
 
@@ -87,8 +79,13 @@ function App() {
   const marqueeMeasureRef = useRef<HTMLDivElement>(null)
   const [marqueeCycles, setMarqueeCycles] = useState(2)
   const [activeSnapshot, setActiveSnapshot] = useState(0)
+  const hasMultipleSnapshots = previousHackathonPhotos.length > 1
 
   const shiftSnapshot = (direction: 1 | -1 = 1) => {
+    if (!hasMultipleSnapshots) {
+      return
+    }
+
     setActiveSnapshot((currentIndex) => {
       const nextIndex =
         (currentIndex + direction + previousHackathonPhotos.length) %
@@ -306,7 +303,10 @@ function App() {
   }, [marqueeCycles])
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    if (
+      !hasMultipleSnapshots ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       return undefined
     }
 
@@ -317,7 +317,7 @@ function App() {
     return () => {
       window.clearInterval(autoplay)
     }
-  }, [])
+  }, [autoplaySnapshot, hasMultipleSnapshots])
 
   return (
     <div className="page-shell" ref={rootRef}>
@@ -345,12 +345,23 @@ function App() {
               to prototype bold solutions aligned with the Sustainable Development Goals.
             </p>
             <div className="hero-actions">
-              <a href="#signals" className="button button--solid">
-                Explore tracks
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfgEY8aQuy-hANL0CnPLbryVT2C7aRbZcvTKfVJiDq89zySOA/viewform?usp=header"
+                className="button button--solid button--primary-cta"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Register now
               </a>
-              <a href="#contact" className="button button--ghost">
-                Contact organizers
-              </a>
+
+              <div className="hero-actions-secondary">
+                <a href="#sustainable-goals" className="button button--subtle">
+                  Explore tracks
+                </a>
+                <a href="#contact-details" className="button button--subtle">
+                  Contact organizers
+                </a>
+              </div>
             </div>
           </div>
 
@@ -411,14 +422,14 @@ function App() {
           </div>
         </section>
 
-        <section className="signals section" id="signals">
+        <section className="signals section" id="sustainable-goals">
           <div className="section-heading section-heading--wide">
-            <p className="eyebrow">Horizontal track rail</p>
-            <h2>Tracks move laterally while the page stays pinned in place.</h2>
-            <p className="section-copy">
+          
+            <h2>Hackathon Tracks</h2>
+            {/* <p className="section-copy">
               On desktop, the site leans into motion and pacing. On mobile, those same
               sections collapse into a cleaner stacked sequence without losing the tone.
-            </p>
+            </p> */}
           </div>
 
           <div className="signal-viewport">
@@ -455,57 +466,52 @@ function App() {
                         alt={photo.alt}
                         style={{ objectPosition: photo.position }}
                       />
-                      <figcaption className="snapshot-caption">
-                        <span className="snapshot-caption-label">
-                          Previous hackathon highlight
-                        </span>
-                        <h3>{photo.title}</h3>
-                        <p>{photo.summary}</p>
-                      </figcaption>
                     </figure>
                   )
                 })}
               </div>
 
-              <div className="snapshot-carousel-controls">
-                <div className="snapshot-carousel-dots" aria-label="Select gallery image">
-                  {previousHackathonPhotos.map((photo, index) => (
-                    <button
-                      key={photo.title}
-                      type="button"
-                      className={`snapshot-dot${index === activeSnapshot ? ' is-active' : ''}`}
-                      onClick={() => {
-                        setActiveSnapshot(index)
-                      }}
-                      aria-label={`Show ${photo.title}`}
-                      aria-pressed={index === activeSnapshot}
-                    />
-                  ))}
-                </div>
+              {hasMultipleSnapshots ? (
+                <div className="snapshot-carousel-controls">
+                  <div className="snapshot-carousel-dots" aria-label="Select gallery image">
+                    {previousHackathonPhotos.map((photo, index) => (
+                      <button
+                        key={photo.src}
+                        type="button"
+                        className={`snapshot-dot${index === activeSnapshot ? ' is-active' : ''}`}
+                        onClick={() => {
+                          setActiveSnapshot(index)
+                        }}
+                        aria-label={`Show ${photo.title}`}
+                        aria-pressed={index === activeSnapshot}
+                      />
+                    ))}
+                  </div>
 
-                <div className="snapshot-carousel-actions">
-                  <button
-                    type="button"
-                    className="snapshot-action"
-                    onClick={() => {
-                      shiftSnapshot(-1)
-                    }}
-                    aria-label="Show previous image"
-                  >
-                    Prev
-                  </button>
-                  <button
-                    type="button"
-                    className="snapshot-action"
-                    onClick={() => {
-                      shiftSnapshot(1)
-                    }}
-                    aria-label="Show next image"
-                  >
-                    Next
-                  </button>
+                  <div className="snapshot-carousel-actions">
+                    <button
+                      type="button"
+                      className="snapshot-action"
+                      onClick={() => {
+                        shiftSnapshot(-1)
+                      }}
+                      aria-label="Show previous image"
+                    >
+                      Prev
+                    </button>
+                    <button
+                      type="button"
+                      className="snapshot-action"
+                      onClick={() => {
+                        shiftSnapshot(1)
+                      }}
+                      aria-label="Show next image"
+                    >
+                      Next
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
 
@@ -525,16 +531,31 @@ function App() {
           </div>
         </section>
 
-        <section className="contact section reveal" id="contact">
+        <section className="contact section reveal" id="contact-details">
           <div className="contact-card">
-            <p className="eyebrow">Next move</p>
-            <h2>This is now set up as a strong hackathon landing page foundation.</h2>
+            <p className="eyebrow">We are here</p>
+            <h2>Contact Us</h2>
             <p>
-              Next step is to replace the placeholder brand with your event name, then add
-              the real schedule, sponsors, prizes, FAQs, and registration flow.
+              Feel free to contact us with your doubts regarding hackathons either via Whatsapp messages or calls.
             </p>
-            <a href="mailto:hello@hackathonpulse.dev" className="button button--solid">
-              hello@hackathonpulse.dev
+            <a href="mailto:pratheek.r@aiesecmember.in" className="button button--solid">
+            pratheek.r@aiesecmember.in
+            </a>
+            <a
+              href="https://wa.me/919150613156"
+              className="button button--subtle"
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp Nandkishan: +91 91506 13156
+            </a>
+            <a
+              href="https://wa.me/919092111033"
+              className="button button--subtle"
+              target="_blank"
+              rel="noreferrer"
+            >
+              WhatsApp Rhaiya: +91 90921 11033
             </a>
           </div>
         </section>

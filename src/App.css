@@ -171,9 +171,15 @@
 }
 
 .hero-actions {
-  display: flex;
-  gap: 0.9rem;
+  display: grid;
+  gap: 0.85rem;
   margin-top: 2rem;
+  justify-items: center;
+}
+
+.hero-actions-secondary {
+  display: flex;
+  gap: 0.7rem;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -361,6 +367,21 @@
   color: #f4f9ff;
 }
 
+.button--primary-cta {
+  min-width: 13rem;
+  padding-inline: 1.5rem;
+  box-shadow: 0 18px 36px rgba(21, 108, 255, 0.22);
+}
+
+.button--subtle {
+  min-height: 2.9rem;
+  padding: 0 1rem;
+  border: 1px solid rgba(8, 26, 67, 0.12);
+  background: rgba(255, 255, 255, 0.54);
+  color: rgba(8, 26, 67, 0.78);
+  font-weight: 650;
+}
+
 .button--ghost {
   border: 1px solid rgba(8, 26, 67, 0.16);
   color: var(--ink);
@@ -438,6 +459,7 @@
 
 .signals {
   padding-top: 0;
+  scroll-margin-top: 1.5rem;
 }
 
 .signal-viewport {
@@ -542,16 +564,6 @@
   background: rgba(8, 26, 67, 0.7);
   backdrop-filter: blur(16px);
   color: #f4f8ff;
-}
-
-.snapshot-caption-label {
-  display: inline-block;
-  margin-bottom: 0.55rem;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(244, 248, 255, 0.72);
 }
 
 .snapshot-caption h3 {
@@ -671,6 +683,7 @@
 .contact {
   padding-top: 2rem;
   padding-bottom: 6rem;
+  scroll-margin-top: 1.5rem;
 }
 
 .contact-card {
@@ -826,6 +839,10 @@
 
   .hero-actions {
     margin-top: 1.5rem;
+  }
+
+  .hero-actions-secondary {
+    gap: 0.6rem;
   }
 
   .hero-marquee {

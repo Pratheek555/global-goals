@@ -26,7 +26,7 @@
 }
 
 html {
-  scroll-behavior: auto;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -61,4 +61,10 @@ svg {
 ::selection {
   background: rgba(31, 120, 255, 0.18);
   color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
