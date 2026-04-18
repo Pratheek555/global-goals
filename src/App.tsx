@@ -41,11 +41,11 @@ const eventDetails = [
   },
   {
     label: 'Date',
-    value: '18th & 19th April, 2026',
+    value: '25th & 26th April, 2026',
   },
   {
     label: 'Time',
-    value: '10 am (18th April) - 10 am (19th April)',
+    value: '10 pm (25th April) - 10 am (26th April)',
   },
 ]
 
@@ -443,7 +443,7 @@ function App() {
           <div className="metrics-overview">
             <div className="metrics-copy">
               <p className="eyebrow">Event snapshot</p>
-              <h2>The scale, structure, and support system behind the event.</h2>
+              <h2>Our Previous </h2>
               <p>
                 A quick read on participation, team volume, and the focused sprint window
                 that shaped the final round of prototype pitching.
