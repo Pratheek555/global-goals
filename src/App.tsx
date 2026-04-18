@@ -397,7 +397,7 @@ function App() {
               <span className="event-details-label">{eventDetails[0].label}</span>
               <h2 className="event-details-theme">{eventDetails[0].value}</h2>
               <p className="event-details-summary">
-                A 24-hour campus hackathon hosted at SRM-AP University, designed for teams
+                A 12-hour campus hackathon hosted at SRM-AP University, designed for teams
                 building around real Sustainable Development Goal challenges.
               </p>
 
