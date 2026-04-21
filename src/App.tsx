@@ -1,6 +1,7 @@
 import { useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -320,7 +321,9 @@ function App() {
   }, [autoplaySnapshot, hasMultipleSnapshots])
 
   return (
-    <div className="page-shell" ref={rootRef}>
+    <>
+      <Analytics />
+      <div className="page-shell" ref={rootRef}>
       <main>
         <section className="hero section">
           <div className="hero-scene" aria-hidden="true">
@@ -561,6 +564,7 @@ function App() {
         </section>
       </main>
     </div>
+    </>
   )
 }
 
