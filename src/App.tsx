@@ -1,7 +1,6 @@
 import { useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { Analytics } from '@vercel/analytics/react'
 import './App.css'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -30,6 +29,29 @@ const metrics = [
 ]
 
 const marqueeWords = ['Build', 'Ship', 'Pitch', 'Win']
+
+const partnerCredits = [
+  {
+    name: 'Notion',
+    src: '/brand-logos/notion.png',
+    className: 'partner-logo partner-logo--notion',
+  },
+  {
+    name: 'JetBrains',
+    src: '/brand-logos/jetbrains.svg',
+    className: 'partner-logo partner-logo--jetbrains',
+  },
+  {
+    name: 'MongoDB',
+    src: '/brand-logos/mongodb.svg',
+    className: 'partner-logo partner-logo--mongodb',
+  },
+  {
+    name: 'DocuPipe',
+    src: '/brand-logos/docupipe.png',
+    className: 'partner-logo partner-logo--docupipe',
+  },
+]
 
 const eventDetails = [
   {
@@ -321,9 +343,7 @@ function App() {
   }, [autoplaySnapshot, hasMultipleSnapshots])
 
   return (
-    <>
-      <Analytics />
-      <div className="page-shell" ref={rootRef}>
+    <div className="page-shell" ref={rootRef}>
       <main>
         <section className="hero section">
           <div className="hero-scene" aria-hidden="true">
@@ -356,6 +376,21 @@ function App() {
               >
                 Register now
               </a>
+
+              <div className="hero-perks" aria-label="Participant credits">
+                <span className="hero-perks-label">Free credits from</span>
+                <div className="hero-perks-list">
+                  {partnerCredits.map((partner) => (
+                    <span className={partner.className} key={partner.name} aria-label={partner.name}>
+                      <img
+                        className="partner-logo__image"
+                        src={partner.src}
+                        alt={`${partner.name} logo`}
+                      />
+                    </span>
+                  ))}
+                </div>
+              </div>
 
               <div className="hero-actions-secondary">
                 <a href="#sustainable-goals" className="button button--subtle">
@@ -563,8 +598,7 @@ function App() {
           </div>
         </section>
       </main>
-    </div>
-    </>
+      </div>
   )
 }
 

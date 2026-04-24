@@ -20,13 +20,14 @@
 
 .hero {
   min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2.2rem;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1.5rem;
   overflow: clip;
-  padding-top: 7rem;
-  padding-bottom: 8rem;
+  padding-top: 5rem;
+  padding-bottom: 1.75rem;
 }
 
 .hero-scene {
@@ -85,6 +86,7 @@
 .hero-copy {
   width: 100%;
   display: grid;
+  align-content: center;
   justify-items: center;
   text-align: center;
 }
@@ -175,6 +177,69 @@
   gap: 0.85rem;
   margin-top: 2rem;
   justify-items: center;
+}
+
+.hero-perks {
+  display: grid;
+  gap: 0.7rem;
+  justify-items: center;
+  width: min(100%, 38rem);
+  padding: 0.2rem 0;
+}
+
+.hero-perks-label {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(8, 26, 67, 0.55);
+}
+
+.hero-perks-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.partner-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+}
+
+.partner-logo__image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 2.35rem;
+  object-fit: contain;
+}
+
+.partner-logo--notion {
+  width: 2.35rem;
+}
+
+.partner-logo--notion .partner-logo__image {
+  max-height: 2.1rem;
+}
+
+.partner-logo--jetbrains {
+  width: 7rem;
+}
+
+.partner-logo--mongodb {
+  width: 7.6rem;
+}
+
+.partner-logo--docupipe {
+  width: 2.9rem;
+}
+
+.partner-logo--docupipe .partner-logo__image {
+  max-height: 2.5rem;
 }
 
 .hero-actions-secondary {
@@ -389,10 +454,10 @@
 }
 
 .hero-marquee {
-  position: absolute;
-  left: 1.5rem;
-  right: 1.5rem;
-  bottom: 1.5rem;
+  position: relative;
+  width: 100%;
+  margin-top: 0.25rem;
+  align-self: end;
   overflow: hidden;
   border-top: 1px solid rgba(8, 26, 67, 0.12);
   padding-top: 1rem;
@@ -706,18 +771,14 @@
     min-height: 100dvh;
     gap: 1.6rem;
     padding-top: clamp(2.75rem, 8vw, 4rem);
-    padding-bottom: 6.75rem;
+    padding-bottom: 1.1rem;
   }
 
   .hero-copy {
-    min-height: 100%;
     align-content: center;
   }
 
   .hero-marquee {
-    left: 1rem;
-    right: 1rem;
-    bottom: max(1rem, env(safe-area-inset-bottom));
     padding-top: 0.85rem;
   }
 
@@ -816,7 +877,7 @@
 
   .hero {
     padding-top: 2.5rem;
-    padding-bottom: 6rem;
+    padding-bottom: max(0.9rem, env(safe-area-inset-bottom));
   }
 
   .hero-whisper {
@@ -841,14 +902,38 @@
     margin-top: 1.5rem;
   }
 
+  .hero-perks {
+    width: 100%;
+    padding: 0.2rem 0;
+  }
+
+  .hero-perks-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+
+  .partner-logo {
+    min-height: 2.5rem;
+  }
+
+  .partner-logo__image {
+    max-height: 2.1rem;
+  }
+
+  .partner-logo--jetbrains {
+    width: 5.9rem;
+  }
+
+  .partner-logo--mongodb {
+    width: 6.4rem;
+  }
+
   .hero-actions-secondary {
     gap: 0.6rem;
   }
 
   .hero-marquee {
-    left: 0.75rem;
-    right: 0.75rem;
-    bottom: max(0.75rem, env(safe-area-inset-bottom));
+    margin-top: 0.15rem;
   }
 
   .marquee-track {
